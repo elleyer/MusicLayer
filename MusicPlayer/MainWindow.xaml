@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="355.333" Width="534.333" SizeToContent="WidthAndHeight" WindowStartupLocation="Manual">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+        <Slider x:Name="MusicPositionSlider" Margin="10,0,19,11.5" Background="#FFEEEEEE" BorderBrush="White" Foreground="White" UseLayoutRounding="False" Grid.Row="2" Height="19.5" VerticalAlignment="Bottom" ValueChanged="OnValueChanged" IsMoveToPointEnabled="True"/>
+        <Button x:Name="LoadTracksButton" Content="Load tracks" Margin="0,10,18,0" Click="OnClickLoadButton" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TimelinePlaybackValue" Margin="10,0,0,34" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" Text="0:00" Height="16" Width="31" Grid.RowSpan="2"/>
+        <ListBox x:Name="MusicListBox" MouseDoubleClick="OnItemMouseDoubleClicked" Margin="10,10,304,35"/>
+        <Button x:Name="PlayOrPauseButtonUI" Content="State" Margin="0,0,19,36" Click="PlayOrPauseButton" Cursor="Hand" RenderTransformOrigin="1,1" HorizontalAlignment="Right" Width="74" Grid.RowSpan="3" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
