@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer", "MusicPlayer\MusicPlayer.csproj", "{A11F203A-9D72-40E6-B252-F184719A093B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A11F203A-9D72-40E6-B252-F184719A093B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11F203A-9D72-40E6-B252-F184719A093B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11F203A-9D72-40E6-B252-F184719A093B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11F203A-9D72-40E6-B252-F184719A093B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
