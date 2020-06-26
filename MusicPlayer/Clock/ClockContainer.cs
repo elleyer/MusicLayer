@@ -12,6 +12,9 @@ namespace MusicPlayer.Clock
 {
     class ClockContainer
     {
+        private const int UPDATE_PERIOD = 1;
+        private const int UPDATE_DUE_TIME = 1;
+
         internal Timer Timer;
 
         internal Slider Slider;
@@ -36,7 +39,7 @@ namespace MusicPlayer.Clock
             Slider.Minimum = 0;
             Slider.Maximum = (double)Bass.ChannelGetLength(Stream);
 
-            Timer.Change(1, 1);
+            Timer.Change(UPDATE_DUE_TIME, UPDATE_PERIOD);
         }
 
         internal void SetStream(int stream)

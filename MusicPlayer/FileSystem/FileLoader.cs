@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 using ManagedBass;
+using MusicPlayer.Utilities;
 
 namespace MusicPlayer.FileSystem
 {
@@ -17,9 +18,11 @@ namespace MusicPlayer.FileSystem
         {
             var files = Directory.GetFiles(folder);
 
-            foreach(var file in files)
+            var list = Enum.GetValues(typeof(FileTypes)).Cast<FileTypes>().ToList();
+
+            foreach (var file in files)
             {
-                if(Path.GetExtension(file) == ".mp3")
+                if(list.Contains(Path.GetExtension(file).ToUpper().Remove(0, 1).ToEnum<FileTypes>()))
                 {
                     Bass.Init();
 

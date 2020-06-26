@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilities\EnumUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,6 +66,7 @@
     <Compile Include="Audio\AudioManager.cs" />
     <Compile Include="Clock\ClockContainer.cs" />
     <Compile Include="FileSystem\FileLoader.cs" />
+    <Compile Include="FileSystem\FileTypes.cs" />
     <Compile Include="FileSystem\LocalFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
