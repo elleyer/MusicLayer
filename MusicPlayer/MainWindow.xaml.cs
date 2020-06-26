@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using MusicPlayer.Audio;
 using MusicPlayer.Clock;
+using MusicPlayer.Data;
 using MusicPlayer.FileSystem;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -39,7 +40,7 @@ namespace MusicPlayer
             switch (AudioLoader.State)
             {
                 case State.Playing:
-                    PlayOrPauseButtonUI.Content = "Play";
+                    PlayOrPauseButtonUI.Content = Constants.PLAY_STATE;
 
                     AudioLoader.Pause();
 
@@ -48,7 +49,7 @@ namespace MusicPlayer
                     break;
 
                 case State.Paused:
-                    PlayOrPauseButtonUI.Content = "Pause";
+                    PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
                     AudioLoader.Play();
 
@@ -58,7 +59,7 @@ namespace MusicPlayer
                     break;
 
                 case State.Idle:
-                    PlayOrPauseButtonUI.Content = "Pause";
+                    PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
                     AudioLoader.Play();
 
@@ -95,7 +96,7 @@ namespace MusicPlayer
                 AudioLoader.SetTrack(FileLoader.Files.
                     FirstOrDefault(x => x.FileName == MusicListBox.SelectedItem.ToString()));
 
-                PlayOrPauseButtonUI.Content = "Pause";
+                PlayOrPauseButtonUI.Content = Constants.PLAY_STATE;
                 PlayOrPauseButtonUI.UpdateLayout();
             }
         }
