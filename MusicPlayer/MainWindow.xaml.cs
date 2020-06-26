@@ -76,6 +76,9 @@ namespace MusicPlayer
 
             selectFolder.ShowDialog();
 
+            if (selectFolder.SelectedPath == string.Empty)
+                return;
+
             FileLoader = new FileLoader(selectFolder.SelectedPath); //Dispose
 
             FileLoader.LoadToList(MusicListBox);
