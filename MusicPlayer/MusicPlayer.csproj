@@ -54,7 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Audio\AudioProperties.cs" />
     <Compile Include="Data\Constants.cs" />
+    <Compile Include="Events\TrackEventHandler.cs" />
     <Compile Include="Utilities\EnumUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -15,13 +15,13 @@ namespace MusicPlayer.Clock
         private const int UPDATE_PERIOD = 1;
         private const int UPDATE_DUE_TIME = 1;
 
+        internal int Stream;
+
         internal Timer Timer;
 
         internal Slider Slider;
 
         internal TextBlock TextBlock;
-
-        internal int Stream;
 
         private Dispatcher _dispatcher;
 

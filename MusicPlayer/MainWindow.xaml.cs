@@ -22,15 +22,14 @@ namespace MusicPlayer
 
         internal ClockContainer ClockContainer;
 
-        internal static bool Snapping;
-
         public MainWindow()
         {
             InitializeComponent();
 
             AudioLoader = new AudioManager();
 
-            ClockContainer = new ClockContainer(MusicPositionSlider, TimelinePlaybackValue, AudioLoader.Stream, Dispatcher);
+            ClockContainer = new ClockContainer(MusicPositionSlider, 
+                TimelinePlaybackValue, AudioLoader.Stream, Dispatcher);
 
             AudioLoader.ClockContainer = ClockContainer;
         }
@@ -42,7 +41,7 @@ namespace MusicPlayer
                 case State.Playing:
                     PlayOrPauseButtonUI.Content = Constants.PLAY_STATE;
 
-                    AudioLoader.Pause();
+                    AudioLoader.SetState(State.Paused);
 
                     ClockContainer.StopUpdate();
 
@@ -51,7 +50,7 @@ namespace MusicPlayer
                 case State.Paused:
                     PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
-                    AudioLoader.Play();
+                    AudioLoader.SetState(State.Playing);
 
                     ClockContainer.Update();
  
@@ -61,7 +60,7 @@ namespace MusicPlayer
                 case State.Idle:
                     PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
-                    AudioLoader.Play();
+                    AudioLoader.SetState(State.Playing);
 
                     ClockContainer.Update();
 
@@ -93,11 +92,14 @@ namespace MusicPlayer
 
                 ClockContainer.Reset();
 
-                AudioLoader.SetTrack(FileLoader.Files.
-                    FirstOrDefault(x => x.FileName == MusicListBox.SelectedItem.ToString()));
+                var file = FileLoader.Files.
+                    FirstOrDefault(x => x.FileName == MusicListBox.SelectedItem.ToString());
 
-                PlayOrPauseButtonUI.Content = Constants.PLAY_STATE;
-                PlayOrPauseButtonUI.UpdateLayout();
+                AudioLoader.SetTrack(file);
+
+                PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
+
+                CurrentTrackTextBlock.Text = file.FileName;
             }
         }
 

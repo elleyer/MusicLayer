@@ -17,36 +17,29 @@ namespace MusicPlayer.Audio
 
         internal ClockContainer ClockContainer;
 
+        internal AudioProperties AudioProperties;
+
         internal AudioManager()
         {
             Bass.Init();
         }
 
-        internal void Play()
+        internal void SetState(State state)
         {
-            State = State.Playing;
+            switch (state)
+            {
+                case State.Playing:
+                    State = State.Playing;
 
-            if (Stream != null)
-                Bass.ChannelPlay(Stream);
-        }
+                    Bass.ChannelPlay(Stream);
+                    break;
 
-        internal void Pause()
-        {
+                case State.Paused:
+                    State = State.Paused;
 
-            State = State.Paused;
-
-            if (Stream != null)
-                Bass.ChannelPause(Stream);
-        }
-
-        internal void Stop()
-        {
-            State = State.Idle;
-
-            if (Stream != null)
-                Bass.ChannelStop(Stream);
-
-            Bass.Free();
+                    Bass.ChannelPause(Stream);
+                    break;
+            }        
         }
 
         internal void SetTrack(LocalFile localFile)
@@ -61,7 +54,7 @@ namespace MusicPlayer.Audio
 
             ClockContainer.Update();
 
-            Play();
+            SetState(State.Playing);
         }
 
         internal void SetPosition(double value)
