@@ -13,11 +13,9 @@ namespace MusicPlayer.Audio
     {
         internal State State = State.Idle;
 
-        internal int Stream;
+        internal int Stream { get; private set; }
 
-        internal ClockContainer ClockContainer;
-
-        internal AudioProperties AudioProperties;
+        internal AudioProperties AudioProperties = default;
 
         internal AudioManager()
         {
@@ -50,16 +48,17 @@ namespace MusicPlayer.Audio
 
             Stream = Bass.CreateStream(localFile.Path);
 
-            ClockContainer.SetStream(Stream);
-
-            ClockContainer.Update();
-
             SetState(State.Playing);
         }
 
         internal void SetPosition(double value)
         {
             Bass.ChannelSetPosition(Stream, (long)value);
+        }
+
+        internal void SetVolume(double volumeLevel)
+        {
+            Bass.GlobalStreamVolume = ((int)volumeLevel * 100);
         }
     }
 

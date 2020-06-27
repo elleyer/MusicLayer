@@ -12,7 +12,7 @@ namespace MusicPlayer.Events
 
         internal void OnTrackChanged()
         {
-
+         
         }
 
         internal void OnTrackEnded()

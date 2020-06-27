@@ -5,25 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MusicLayer" Height="800" Width="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="MusicLayer" Height="333" Width="400" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="640" MinHeight="477">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="247*"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="376*"/>
             <RowDefinition Height="0*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
-        <Slider x:Name="MusicPositionSlider" Margin="10,0,10,11.5" Background="#FFEEEEEE" BorderBrush="White" Foreground="White" UseLayoutRounding="False" Grid.Row="7" Height="19.5" VerticalAlignment="Bottom" ValueChanged="OnValueChanged" IsMoveToPointEnabled="True"/>
-        <Button x:Name="LoadTracksButton" Content="Load tracks" Margin="0,10,18,0" Click="OnClickLoadButton" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top"/>
-        <TextBlock x:Name="TimelinePlaybackValue" Margin="10,0,0,34" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="4" HorizontalAlignment="Left" Text="0:00" Height="16" Width="34" Grid.RowSpan="4"/>
-        <ListBox x:Name="MusicListBox" MouseDoubleClick="OnItemMouseDoubleClicked" Margin="10,10,304,8"/>
-        <Button x:Name="PlayOrPauseButtonUI" Content="State" Margin="0,0,10,38" Click="PlayOrPauseButton" Cursor="Hand" RenderTransformOrigin="1,1" Grid.RowSpan="5" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Grid.Row="3"/>
-        <TextBlock x:Name="CurrentTrackTextBlock" Margin="39,0,363,34" Grid.Row="4" Grid.RowSpan="4" TextWrapping="Wrap" Text="TextBlock" Height="16" VerticalAlignment="Bottom"/>
+        <Slider x:Name="MusicPositionSlider" Margin="10,0,10,11.5" Background="{x:Null}" BorderBrush="{x:Null}" UseLayoutRounding="False" Grid.Row="7" Height="19.5" VerticalAlignment="Bottom" ValueChanged="OnTimelineSliderValueChanged" IsMoveToPointEnabled="True" Value="-1" Foreground="{x:Null}" BorderThickness="0"/>
+        <Button x:Name="LoadTracksButton" Content="Load tracks" Margin="0,32,10,0" Click="OnClickLoadButton" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TimelinePlaybackValue" Margin="10,0,0,34" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="7" HorizontalAlignment="Left" Text="0:00" Height="16" Width="34"/>
+        <Button x:Name="PlayOrPauseButtonUI" Content="State" Margin="0,0,10,38" Click="PlayOrPauseButton" Cursor="Hand" RenderTransformOrigin="1,1" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Grid.Row="6"/>
+        <TextBlock x:Name="CurrentTrackTextBlock" Margin="39,0,363,34" Grid.Row="7" TextWrapping="Wrap" Text="TextBlock" Height="16" VerticalAlignment="Bottom"/>
         <CheckBox x:Name="LoopedCheckbox" Content="Repeat" Margin="0,0,89,37" Width="61" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Row="7" VerticalContentAlignment="Bottom" Height="17" VerticalAlignment="Bottom"/>
         <CheckBox x:Name="AutoNextCheckbox" Content="Auto next" Margin="0,0,155,37" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="74" VerticalContentAlignment="Bottom" Height="19" VerticalAlignment="Bottom" Grid.Row="7"/>
+        <Slider x:Name="MasterVolumeSlider" Margin="0,57,10,0" Orientation="Vertical" HorizontalAlignment="Right" Width="20" ValueChanged="OnVolumeSliderChanged" Maximum="100" Value="100"/>
+        <TabControl Margin="10,35,0,0" MaxWidth="400" HorizontalAlignment="Left" Width="299">
+            <TabItem Header="Local">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="MusicListBox" MouseDoubleClick="OnItemMouseDoubleClicked"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="SoundCloud">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Spotify">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Mixed">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <ToolBar Height="25" VerticalAlignment="Top">
+            <Menu>
+                <MenuItem Header="File" Margin="0" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35">
+                    <MenuItem Header="Update directories"/>
+                </MenuItem>
+            </Menu>
+            <Separator />
+            <Menu>
+                <MenuItem Header="Additional" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20">
+                    <MenuItem Header="Sort by...">
+                        <MenuItem Header = "Track name"/>
+                        <MenuItem Header="Track length"/>
+                        <MenuItem Header="Addition date"/>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Separator />
+            <Menu>
+                <MenuItem Header="Help" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
+                    <MenuItem Header="Info"/>
+                </MenuItem>
+            </Menu>
+        </ToolBar>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using MusicPlayer.Audio;
 using MusicPlayer.Clock;
 using MusicPlayer.Data;
 using MusicPlayer.FileSystem;
+using MusicPlayer.UI;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Documents;
@@ -16,43 +17,41 @@ namespace MusicPlayer
     /// </summary>
     public partial class MainWindow
     {
-        internal AudioManager AudioLoader;
+        internal AudioManager AudioManager;
 
         internal FileLoader FileLoader;
 
-        internal ClockContainer ClockContainer;
+        internal MainWindowController MainWindowController;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            AudioLoader = new AudioManager();
+            AudioManager = new AudioManager();
 
-            ClockContainer = new ClockContainer(MusicPositionSlider, 
-                TimelinePlaybackValue, AudioLoader.Stream, Dispatcher);
-
-            AudioLoader.ClockContainer = ClockContainer;
+            MainWindowController = new MainWindowController(Dispatcher, AudioManager,
+                MusicPositionSlider, MasterVolumeSlider, TimelinePlaybackValue);
         }
 
         private void PlayOrPauseButton(object sender, System.Windows.RoutedEventArgs e)
         {
-            switch (AudioLoader.State)
+            switch (AudioManager.State)
             {
                 case State.Playing:
                     PlayOrPauseButtonUI.Content = Constants.PLAY_STATE;
 
-                    AudioLoader.SetState(State.Paused);
+                    AudioManager.SetState(State.Paused);
 
-                    ClockContainer.StopUpdate();
+                    MainWindowController.StopUpdate();
 
                     break;
 
                 case State.Paused:
                     PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
-                    AudioLoader.SetState(State.Playing);
+                    AudioManager.SetState(State.Playing);
 
-                    ClockContainer.Update();
+                    MainWindowController.Update();
  
 
                     break;
@@ -60,9 +59,9 @@ namespace MusicPlayer
                 case State.Idle:
                     PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
-                    AudioLoader.SetState(State.Playing);
+                    AudioManager.SetState(State.Playing);
 
-                    ClockContainer.Update();
+                    MainWindowController.Update();
 
                     break;
             }
@@ -90,12 +89,12 @@ namespace MusicPlayer
             {
                 var dataContext = MusicListBox.DataContext;
 
-                ClockContainer.Reset();
-
                 var file = FileLoader.Files.
                     FirstOrDefault(x => x.FileName == MusicListBox.SelectedItem.ToString());
 
-                AudioLoader.SetTrack(file);
+                AudioManager.SetTrack(file);
+
+                MainWindowController.Update();
 
                 PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
 
@@ -103,12 +102,17 @@ namespace MusicPlayer
             }
         }
 
-        private void OnValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        private void OnTimelineSliderValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             if (!MusicPositionSlider.IsMouseOver)
                 return;
 
-            AudioLoader.SetPosition(MusicPositionSlider.Value);
+            AudioManager?.SetPosition(MusicPositionSlider.Value);
+        }
+
+        private void OnVolumeSliderChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            AudioManager?.SetVolume(MasterVolumeSlider.Value);
         }
     }
 }
