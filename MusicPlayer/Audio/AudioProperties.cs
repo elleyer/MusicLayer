@@ -10,6 +10,8 @@ namespace MusicPlayer.Audio
     {
         internal bool Looped { get; private set; }
 
+        internal long PlaybackLength { get; set; }
+
         internal void SetLoopValue(bool value) => Looped = value;
     }
 }

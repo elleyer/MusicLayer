@@ -60,6 +60,11 @@ namespace MusicPlayer.UI
                                 (int)span.TotalMinutes,
                                 span.Seconds);
 
+                    if (position >= Bass.ChannelGetLength(_audioManager.Stream))
+                    {
+                        _audioManager.SongStatusEnded();
+                    }
+
                     if (TimelineSlider.IsMouseOver)
                         return;
 

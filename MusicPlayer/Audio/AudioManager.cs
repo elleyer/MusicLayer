@@ -9,17 +9,32 @@ using MusicPlayer.FileSystem;
 
 namespace MusicPlayer.Audio
 {
-    internal class AudioManager
+    internal class AudioManager : IDisposable
     {
+        internal delegate void TrackEnded();
+
+        internal event TrackEnded OnTrackEnded;
+
         internal State State = State.Idle;
 
         internal int Stream { get; private set; }
 
+        internal int CurrentTrackID { get; set; }
+
         internal AudioProperties AudioProperties = default;
+
+        internal FileLoader FileLoader;
 
         internal AudioManager()
         {
             Bass.Init();
+
+            AudioProperties = new AudioProperties();
+        }
+
+        internal void LoadFiles(FileLoader fileloader)
+        {
+            FileLoader = fileloader;
         }
 
         internal void SetState(State state)
@@ -48,6 +63,8 @@ namespace MusicPlayer.Audio
 
             Stream = Bass.CreateStream(localFile.Path);
 
+            AudioProperties.PlaybackLength = Bass.ChannelGetLength(Stream);
+
             SetState(State.Playing);
         }
 
@@ -59,6 +76,16 @@ namespace MusicPlayer.Audio
         internal void SetVolume(double volumeLevel)
         {
             Bass.GlobalStreamVolume = ((int)volumeLevel * 100);
+        }
+
+        internal void SongStatusEnded()
+        {
+            OnTrackEnded.Invoke();
+        }
+
+        void IDisposable.Dispose()
+        {
+            
         }
     }
 

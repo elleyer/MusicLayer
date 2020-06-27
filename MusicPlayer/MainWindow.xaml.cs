@@ -5,6 +5,8 @@ using MusicPlayer.Clock;
 using MusicPlayer.Data;
 using MusicPlayer.FileSystem;
 using MusicPlayer.UI;
+using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Documents;
@@ -29,8 +31,43 @@ namespace MusicPlayer
 
             AudioManager = new AudioManager();
 
+            AudioManager.OnTrackEnded += OnTrackEndedHandler;
+
             MainWindowController = new MainWindowController(Dispatcher, AudioManager,
                 MusicPositionSlider, MasterVolumeSlider, TimelinePlaybackValue);
+        }
+
+        private void UpdateTrack(LocalFile file)
+        {
+            AudioManager.SetTrack(file);
+
+            AudioManager.CurrentTrackID = FileLoader.Files.IndexOf(file);
+
+            MainWindowController.SetTimelineValues(0,
+                AudioManager.AudioProperties.PlaybackLength);
+
+            MainWindowController.Update();
+
+            PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
+
+            CurrentTrackTextBlock.Text = file.FileName;
+        }
+
+        private void OnTrackEndedHandler()
+        {
+
+            var name1 = (FileLoader.Files[AudioManager.CurrentTrackID].FileName);
+            var name2 = (FileLoader.Files[AudioManager.CurrentTrackID + 1].FileName);
+
+            switch (AudioManager.AudioProperties.Looped)
+            {
+                case true:
+                    UpdateTrack(FileLoader.Files[AudioManager.CurrentTrackID]);
+                    break;
+                case false:
+                    UpdateTrack(FileLoader.Files[AudioManager.CurrentTrackID + 1]);
+                    break;
+            }
         }
 
         private void PlayOrPauseButton(object sender, System.Windows.RoutedEventArgs e)
@@ -92,13 +129,7 @@ namespace MusicPlayer
                 var file = FileLoader.Files.
                     FirstOrDefault(x => x.FileName == MusicListBox.SelectedItem.ToString());
 
-                AudioManager.SetTrack(file);
-
-                MainWindowController.Update();
-
-                PlayOrPauseButtonUI.Content = Constants.PAUSE_STATE;
-
-                CurrentTrackTextBlock.Text = file.FileName;
+                UpdateTrack(file);
             }
         }
 
@@ -113,6 +144,11 @@ namespace MusicPlayer
         private void OnVolumeSliderChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             AudioManager?.SetVolume(MasterVolumeSlider.Value);
+        }
+
+        private void OnRepeatButtonClicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            AudioManager.AudioProperties.SetLoopValue((bool)LoopedCheckbox.IsChecked);
         }
     }
 }
