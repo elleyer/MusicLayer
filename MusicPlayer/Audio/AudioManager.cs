@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ManagedBass;
 using MusicPlayer.Clock;
 using MusicPlayer.FileSystem;
+using GeniusAPIWrapper;
+using GeniusAPIWrapper.Requests;
+using GeniusAPIWrapper.JsonData.Search;
 
 namespace MusicPlayer.Audio
 {

@@ -63,5 +63,49 @@
                 </MenuItem>
             </Menu>
         </ToolBar>
+        <TabControl Margin="324,57,35,0">
+            <TabItem Header="Result">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="MusicListBox1" MouseDoubleClick="OnItemMouseDoubleClicked" Focusable="False">
+                        <TextBlock x:Name="FullTitleBox" TextWrapping="Wrap" Text="Full Title" Width="257"/>
+                        <TextBlock x:Name="ResultIdBox" TextWrapping="Wrap" Text="Id" Width="257"/>
+                        <TextBlock x:Name="LyricsOwnerIdBox" TextWrapping="Wrap" Text="LyricsOwnerId" Width="257"/>
+                        <TextBlock x:Name="RemotePathBox" TextWrapping="Wrap" Text="RemotePath" Width="257"/>
+                        <TextBlock x:Name="TitleBox" TextWrapping="Wrap" Text="Title" Width="257"/>
+                        <TextBlock x:Name="TitleWithFeatureBox" TextWrapping="Wrap" Text="TitleWithFeature" Width="257"/>
+                        <TextBlock x:Name="UrlBox" TextWrapping="Wrap" Text="Url" Width="257"/>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Artist">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="MusicListBox1_Copy" MouseDoubleClick="OnItemMouseDoubleClicked" Focusable="False">
+                        <TextBlock x:Name="ArtistNameBox" TextWrapping="Wrap" Text="ArtistName" Width="257"/>
+                        <TextBlock x:Name="ArtistUrlBox" TextWrapping="Wrap" Text="ArtistUrl" Width="257"/>
+                        <TextBlock x:Name="ArtistImageUrlBox" TextWrapping="Wrap" Text="ArtistImageUrl" Width="257"/>
+                        <TextBlock x:Name="ArtistIDBox" TextWrapping="Wrap" Text="ArtistID" Width="257"/>
+                        <TextBlock x:Name="IsArtistVerifedBox" TextWrapping="Wrap" Text="IsArtistVerifed" Width="257"/>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Stats">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="MusicListBox1_Copy1" MouseDoubleClick="OnItemMouseDoubleClicked" Focusable="False">
+                        <TextBlock x:Name="UnreviewedAnnotationsBox" TextWrapping="Wrap" Text="UnreviewedAnnotations" Width="257"/>
+                        <TextBlock x:Name="ConcurrentsBox" TextWrapping="Wrap" Text="Concurrents" Width="257"/>
+                        <TextBlock x:Name="IsHotBox" TextWrapping="Wrap" Text="IsHot" Width="257"/>
+                        <TextBlock x:Name="PageViewsBox" TextWrapping="Wrap" Text="PageViews" Width="257"/>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Lyrics" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="63" Margin="0">
+                <Grid Background="White">
+                    <StackPanel HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="267"/>
+                    <ScrollViewer HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" CanContentScroll="True">
+                        <TextBlock x:Name="LyricsBox" Text="Null" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="WordEllipsis" Width="241"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

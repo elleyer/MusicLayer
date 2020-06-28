@@ -1,4 +1,6 @@
-﻿using ManagedBass;
+﻿using GeniusAPIWrapper.JsonData.Search;
+using GeniusAPIWrapper.Requests;
+using ManagedBass;
 using Microsoft.Win32;
 using MusicPlayer.Audio;
 using MusicPlayer.Clock;
@@ -9,6 +11,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
 
@@ -25,6 +28,10 @@ namespace MusicPlayer
 
         internal MainWindowController MainWindowController;
 
+        internal StatisticsWindow StatisticsWindow;
+
+        internal APIHandler GeniusApiHandler;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,12 +42,27 @@ namespace MusicPlayer
 
             MainWindowController = new MainWindowController(Dispatcher, AudioManager,
                 MusicPositionSlider, MasterVolumeSlider, TimelinePlaybackValue);
+
+            StatisticsWindow = new StatisticsWindow(Dispatcher, FullTitleBox, ResultIdBox, LyricsOwnerIdBox,
+                RemotePathBox, TitleBox, TitleWithFeatureBox, UrlBox, ArtistNameBox, ArtistUrlBox,
+                ArtistImageUrlBox, ArtistIDBox, IsArtistVerifedBox, UnreviewedAnnotationsBox, ConcurrentsBox,
+                IsHotBox, PageViewsBox, LyricsBox);
+
+            GeniusApiHandler = new APIHandler("3VESSI-JxeTMqgIxUlNpmU516qvCEzSKhHdbxi9966Jg1VPqOc_S5GQ8oljqYpkI");
         }
 
-        private void UpdateTrack(LocalFile file)
+        private async Task UpdateTrack(LocalFile file)
         {
             AudioManager.SetTrack(file);
 
+            if (FileLoader.Files.IndexOf(file) != AudioManager.CurrentTrackID)
+            {
+                var task = await APIHandler.SendRequest(ApiRequestType.Search,
+                    file.FileName) as SearchResponse;
+
+                StatisticsWindow.Update(task);
+            }
+               
             AudioManager.CurrentTrackID = FileLoader.Files.IndexOf(file);
 
             MainWindowController.SetTimelineValues(0,

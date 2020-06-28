@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using GeniusAPIWrapper.JsonData;
+using GeniusAPIWrapper.JsonData.Search;
 using ManagedBass;
 using MusicPlayer.Audio;
 using MusicPlayer.Clock;
