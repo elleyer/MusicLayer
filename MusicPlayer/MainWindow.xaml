@@ -23,7 +23,6 @@
         <Button x:Name="PlayOrPauseButtonUI" Content="State" Margin="0,0,10,38" Click="PlayOrPauseButton" Cursor="Hand" RenderTransformOrigin="1,1" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Grid.Row="6"/>
         <TextBlock x:Name="CurrentTrackTextBlock" Margin="39,0,363,34" Grid.Row="7" TextWrapping="Wrap" Text="TextBlock" Height="16" VerticalAlignment="Bottom"/>
         <CheckBox x:Name="LoopedCheckbox" Content="Repeat" Margin="0,0,89,37" Width="61" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Row="7" VerticalContentAlignment="Bottom" Height="17" VerticalAlignment="Bottom" Click="OnRepeatButtonClicked"/>
-        <CheckBox x:Name="AutoNextCheckbox" Content="Auto next" Margin="0,0,155,37" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="74" VerticalContentAlignment="Bottom" Height="19" VerticalAlignment="Bottom" Grid.Row="7"/>
         <Slider x:Name="MasterVolumeSlider" Margin="0,57,10,0" Orientation="Vertical" HorizontalAlignment="Right" Width="20" ValueChanged="OnVolumeSliderChanged" Maximum="100" Value="100"/>
         <TabControl Margin="10,35,0,0" MaxWidth="400" HorizontalAlignment="Left" Width="299">
             <TabItem Header="Local">
@@ -34,7 +33,7 @@
             <TabItem Header="SoundCloud">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Spotify">
+            <TabItem Header="Spotify" IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Mixed">

@@ -31,7 +31,7 @@ namespace MusicPlayer
 
             AudioManager = new AudioManager();
 
-            AudioManager.OnTrackEnded += OnTrackEndedHandler;
+            AudioManager.OnTrackEnded += OnTrackEndedHandler; //Unsubscribe using Disposable pattern.
 
             MainWindowController = new MainWindowController(Dispatcher, AudioManager,
                 MusicPositionSlider, MasterVolumeSlider, TimelinePlaybackValue);
@@ -55,10 +55,6 @@ namespace MusicPlayer
 
         private void OnTrackEndedHandler()
         {
-
-            var name1 = (FileLoader.Files[AudioManager.CurrentTrackID].FileName);
-            var name2 = (FileLoader.Files[AudioManager.CurrentTrackID + 1].FileName);
-
             switch (AudioManager.AudioProperties.Looped)
             {
                 case true:

@@ -117,6 +117,7 @@
     <Compile Include="Configurations\Sorting\Sorting.cs" />
     <Compile Include="Data\Constants.cs" />
     <Compile Include="Events\TrackEventHandler.cs" />
+    <Compile Include="Networking\Spotify\SoundcloudManager.cs" />
     <Compile Include="UI\MainWindowController.cs" />
     <Compile Include="Utilities\EnumUtils.cs" />
     <Page Include="MainWindow.xaml">
@@ -154,5 +155,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
